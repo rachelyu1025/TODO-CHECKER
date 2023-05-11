@@ -1,8 +1,8 @@
-import { StarProvider } from '../context/StarContext';
-import TodoInput from '../components/todo/TodoInput';
-import TodoList from '../components/todo/TodoList';
+import { StarProvider } from '../../context/StarContext';
+import TodoInput from './TodoInput';
+import TodoList from './TodoList';
 
-export default function Todo() {
+export default function TodoContainer() {
   return (
     <main className='w-full p-3 m-3 bg-[#fff] h-1/2'>
       <TodoInput />

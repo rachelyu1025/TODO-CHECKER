@@ -6,16 +6,18 @@ import Todo from './pages/Todo';
 
 function App() {
   return (
-    <div className='bg-background'>
+    <div className=' bg-background'>
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Todo />} />
-          {/* <Route path="/" element={<Achieve />}/> */}
-        </Routes>
-        <SidebarProvider>
-          <Menu />
-          <Sidebar />
-        </SidebarProvider>
+        <div className='flex flex-row w-screen h-screen'>
+          <SidebarProvider>
+            <Menu />
+            <Sidebar />
+          </SidebarProvider>
+          <Routes>
+            <Route path='/' element={<Todo />} />
+            {/* <Route path="/" element={<Achieve />}/> */}
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
