@@ -16,7 +16,7 @@ export default function Progress() {
       </div>
 
       <div className={`hidden tablet:flex justify-center mt-6`}>
-        <div className='radial-progress text-error' style={style}>
+        <div className='font-semibold radial-progress text-error' style={style}>
           70%
         </div>
       </div>
