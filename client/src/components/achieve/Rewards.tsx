@@ -42,7 +42,7 @@ export default function Rewards() {
       rows.push(
         <div
           key={`week${weekOfMonth}`}
-          className='grid grid-flow-col border border-textColor'
+          className='grid grid-flow-col py-2 border border-textColor'
         >
           {days}
         </div>
@@ -53,9 +53,9 @@ export default function Rewards() {
   }
   return (
     <>
-      <strong className='text-2xl '>{month}</strong>
+      <strong className='text-2xl'>{month}</strong>
       <div
-        className={`grid w-full h-full grid-flow-row grid-cols-7 border border-textColor bg-[#fff] mt-8`}
+        className={`grid w-full h-full grid-flow-row grid-cols-7 border border-textColor bg-[#fff] mt-8 desktop:w-4/5 desktop:mt-12`}
       >
         {rows}
       </div>
