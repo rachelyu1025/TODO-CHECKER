@@ -1,6 +1,5 @@
 import {
   format,
-  // getDaysInMonth,
   startOfMonth,
   endOfMonth,
   getWeekOfMonth,
@@ -14,7 +13,6 @@ export default function Calendar() {
 
   const date = new Date(); // 오늘 날짜, 연도와 달을 받아서 Date 객체 생성
   const today = format(date, 'MMM dd, eee');
-  // const monthDays = getDaysInMonth(date); // 해당 달의 총 일수
   let monthStart = startOfMonth(date); // 해당 달의 시작요일, 일
   const monthEnd = endOfMonth(date); // 해당 달의 마지막일
   let startDate = format(monthStart, 'd'); // 시작일
