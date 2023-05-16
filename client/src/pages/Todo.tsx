@@ -7,8 +7,38 @@ import TodoList from '../components/todo/TodoList';
 import Quotation from '../components/todo/Quotation';
 import Progress from '../components/todo/Progress';
 import Radio from '../components/todo/Radio';
+import { useGetTodos } from '../hooks/useTodos';
+import { useEffect, useState } from 'react';
+import { TodoType } from '../utils/todoType';
 
 export default function Todo() {
+  const { data: todos, isSuccess } = useGetTodos();
+  const [list, setLists] = useState([]);
+
+  useEffect(() => {
+    if (isSuccess && todos) {
+      setLists(todos.data.todoList);
+    }
+
+    console.log(list);
+  }, [isSuccess]);
+
+  const renderTodos = () => {
+    return list.map((todo) => {
+      const { todoId, content, status, importance, createdAt, label } = todo;
+      return (
+        <TodoList
+          todoId={todoId}
+          content={content}
+          status={status}
+          importance={importance}
+          createdAt={createdAt}
+          label={label}
+        />
+      );
+    });
+  };
+
   return (
     <main className='w-full p-3 m-3 h-1/2'>
       <h1 className='text-3xl font-semibold desktop:mb-8'> TODO</h1>
@@ -36,9 +66,7 @@ export default function Todo() {
           </fieldset>
         </TodoStatusProvider>
         <ul className='m-2 overflow-scroll h-1/3'>
-          <StarProvider>
-            <TodoList />
-          </StarProvider>
+          <StarProvider>{renderTodos()}</StarProvider>
         </ul>
       </div>
     </main>
