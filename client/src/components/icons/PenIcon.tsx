@@ -1,4 +1,9 @@
-export default function PenIcon() {
+import { PenIconType } from '../../utils/todoType';
+
+export default function PenIcon({ onClick }: PenIconType) {
+  const handleContent = () => {
+    onClick(true);
+  };
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -7,7 +12,7 @@ export default function PenIcon() {
       strokeWidth={1.5}
       stroke='currentColor'
       className='w-6 h-6 cursor-pointer'
-      onClick={() => {}}
+      onClick={handleContent}
     >
       <path
         strokeLinecap='round'

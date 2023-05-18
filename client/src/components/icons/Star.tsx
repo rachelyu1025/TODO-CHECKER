@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { StarContext } from '../../context/StarContext';
+import { useState } from 'react';
+import { usePutImportance } from '../../hooks/useTodos';
 
-export function EmptyStar() {
-  const { isClicked, setIsClicked } = useContext(StarContext);
-
+export function EmptyStar({ todoId }: { todoId: number | undefined }) {
+  const { mutate } = usePutImportance();
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -12,7 +11,9 @@ export function EmptyStar() {
       stroke='currentColor'
       className={`w-6 h-6 font-bold cursor-pointer`}
       onClick={() => {
-        setIsClicked(true);
+        if (todoId) {
+          mutate({ todoId, importance: true });
+        }
       }}
     >
       <path
@@ -24,8 +25,8 @@ export function EmptyStar() {
   );
 }
 
-export function FilledStar() {
-  const { isClicked, setIsClicked } = useContext(StarContext);
+export function FilledStar({ todoId }: { todoId: number | undefined }) {
+  const { mutate } = usePutImportance();
 
   return (
     <svg
@@ -34,9 +35,9 @@ export function FilledStar() {
       fill='#e0ab00'
       className='w-6 h-6 text-lg cursor-pointer'
       onClick={() => {
-        console.log('click');
-
-        setIsClicked(false);
+        if (todoId) {
+          mutate({ todoId, importance: false });
+        }
       }}
     >
       <path
