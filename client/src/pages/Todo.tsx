@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import { CalendarProvider } from '../context/CalendarContext';
-import { StarProvider } from '../context/StarContext';
 import { TodoStatusProvider } from '../context/TodoStatusContext';
 import Calendar from '../components/todo/Calendar';
 import TodoInput from '../components/todo/TodoInput';
@@ -8,26 +8,27 @@ import Quotation from '../components/todo/Quotation';
 import Progress from '../components/todo/Progress';
 import Radio from '../components/todo/Radio';
 import { useGetTodos } from '../hooks/useTodos';
-import { useEffect, useState } from 'react';
-import { TodoType } from '../utils/todoType';
+import { format } from 'date-fns';
 
 export default function Todo() {
-  const { data: todos, isSuccess } = useGetTodos();
+  const todayDate = format(new Date(), 'yyyyMMdd');
+
+  const { data: todos, isSuccess } = useGetTodos(todayDate);
   const [list, setLists] = useState([]);
 
   useEffect(() => {
     if (isSuccess && todos) {
       setLists(todos.data.todoList);
     }
-
-    console.log(list);
-  }, [isSuccess]);
+  }, [isSuccess, todos]);
 
   const renderTodos = () => {
     return list.map((todo) => {
       const { todoId, content, status, importance, createdAt, label } = todo;
+
       return (
         <TodoList
+          key={todoId}
           todoId={todoId}
           content={content}
           status={status}
@@ -57,7 +58,9 @@ export default function Todo() {
 
       {/* Todo list */}
       <div className='mt-4 bg-[#fff] rounded-b-md'>
-        <TodoInput />
+        <CalendarProvider>
+          <TodoInput />
+        </CalendarProvider>
         <TodoStatusProvider>
           <fieldset className='flex flex-row m-2 space-x-2 tablet:m-4'>
             <Radio value='All'>All</Radio>
@@ -65,9 +68,7 @@ export default function Todo() {
             <Radio value='Complete'>Complete</Radio>
           </fieldset>
         </TodoStatusProvider>
-        <ul className='m-2 overflow-scroll h-1/3'>
-          <StarProvider>{renderTodos()}</StarProvider>
-        </ul>
+        <ul className='m-2 overflow-scroll h-1/3'>{renderTodos()}</ul>
       </div>
     </main>
   );
