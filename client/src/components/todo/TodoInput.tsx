@@ -1,16 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CalendarContext } from '../../context/CalendarContext';
 import AddBtn from './AddBtn';
 
 export default function TodoInput() {
+  const { selectDate } = useContext(CalendarContext);
   const [label, setLabel] = useState('');
   const [content, setContent] = useState('');
-
-  // const body = {
-  //   content,
-  //   createdAt: '2023-04-30',
-  //   labelTitle: label,
-  //   labelColor: '#CCCDDE',
-  // };
 
   const handleLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLabel(e.target.value);
@@ -24,18 +19,25 @@ export default function TodoInput() {
     <div className='flex flex-row justify-between w-full p-2 outline-none h-fit bg-inputBg'>
       <div>color</div>
       <input
-        className='w-1/4 outline-none '
+        className='w-1/4 p-1 rounded outline-none'
         onChange={handleLabel}
         value={label}
-        placeholder=' write your label'
+        placeholder=' type label'
       />
       <input
-        className='w-1/3 outline-none'
+        className='w-1/3 p-1 rounded outline-none'
         onChange={handleContent}
         value={content}
-        placeholder=' write your todo!'
+        placeholder='type todo'
       />
-      <AddBtn />
+      <AddBtn
+        labelColor={'#CCCDDE'}
+        labelTitle={label}
+        content={content}
+        createdAt={selectDate}
+        setLabel={setLabel}
+        setContent={setContent}
+      />
     </div>
   );
 }
