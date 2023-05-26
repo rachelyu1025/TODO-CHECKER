@@ -1,4 +1,8 @@
-export default function BinIcon() {
+import { useDeleteTodo } from '../../hooks/useTodos';
+
+export default function BinIcon({ todoId }: { todoId: number | undefined }) {
+  const { mutate } = useDeleteTodo();
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -7,7 +11,9 @@ export default function BinIcon() {
       strokeWidth={1.5}
       stroke='currentColor'
       className='w-6 h-6 cursor-pointer'
-      onClick={() => {}}
+      onClick={() => {
+        mutate({ todoId });
+      }}
     >
       <path
         strokeLinecap='round'
