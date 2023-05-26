@@ -24,7 +24,7 @@ export default function TodoList({
   };
 
   return (
-    <li className='flex flex-row items-center space-x-3 space-y-2 text-center desktop:space-x-10'>
+    <li className='flex flex-row items-center space-x-3 space-y-2 text-center desktop:space-x-10 desktop:m-2'>
       {/* check section */}
       <input
         id={listId}

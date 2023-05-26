@@ -23,21 +23,23 @@ export default function Todo() {
   }, [isSuccess, todos]);
 
   const renderTodos = () => {
-    return list.map((todo) => {
-      const { todoId, content, status, importance, createdAt, label } = todo;
+    if (list) {
+      return list.map((todo) => {
+        const { todoId, content, status, importance, createdAt, label } = todo;
 
-      return (
-        <TodoList
-          key={todoId}
-          todoId={todoId}
-          content={content}
-          status={status}
-          importance={importance}
-          createdAt={createdAt}
-          label={label}
-        />
-      );
-    });
+        return (
+          <TodoList
+            key={todoId}
+            todoId={todoId}
+            content={content}
+            status={status}
+            importance={importance}
+            createdAt={createdAt}
+            label={label}
+          />
+        );
+      });
+    }
   };
 
   return (
